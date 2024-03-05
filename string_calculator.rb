@@ -1,5 +1,10 @@
 class StringCalculator
   def self.add(numbers)
-    numbers.split(/[,\n]/).map(&:to_i).sum
+    delimiter = ","
+    if numbers.start_with?("//")
+      delimiter, numbers = numbers.match(/\/\/(.)\n(.+)/m).captures
+    end
+
+    numbers.split(/[#{delimiter}\n]/).map(&:to_i).sum
   end
 end
